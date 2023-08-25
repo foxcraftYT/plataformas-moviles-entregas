@@ -46,7 +46,28 @@ var personaEjemplo = listaPersonasEjemplo[0]
  * }
  */
 function crearPersona(nombre, apellido, edad, documento) {
-    // 
+    var objeto ={
+        nombre : "",
+        apellido : "",
+        edad : "",
+        documento : ""
+    };
+    var objeto2 ={
+        nombre : "",
+        apellido : "",
+        edad : "",
+        documento : ""
+    };
+
+
+
+
+
+
+    objeto.nombre = nombre;
+    objeto.apellido = apellido;    
+    objeto.edad = edad;
+    objeto.documento = documento;
 }
 console.log("crearPersona()", crearPersona("Juan", "Pérez", 20, 123456));
 
@@ -83,7 +104,11 @@ console.log("felizCumpleaños()", felizCumpleaños(personaEjemplo));
  * - un objeto, representando a la misma persona recibida, pero sin el campo documento.
  */
 function sinDocumento(persona) {
-    // 
+    return{
+        nombre: persona.nombre,
+        apellido: persona.apellido,
+        edad: persona.edad
+    };
 }
 console.log("sinDocumento()", sinDocumento(personaEjemplo));
 
@@ -95,7 +120,7 @@ console.log("sinDocumento()", sinDocumento(personaEjemplo));
  * - el mismo listado, ordenado alfabéticamente por el apellido de la persona 
  */
 function ordenarPorApellido(listaDePersonas) {
-    // 
+    
 }
 console.log("ordenarPorApellido()", ordenarPorApellido(listaPersonasEjemplo));
 
