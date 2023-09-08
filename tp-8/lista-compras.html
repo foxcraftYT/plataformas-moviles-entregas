@@ -22,10 +22,16 @@
             <div class="card-body">
                 <h2>Listado de Productos</h2>
                 <ul id="lista-productos">
-                    <li>Pan</li>
                 </ul>
 
                 <hr class="hr">
+                <button
+                    class="btn btn-danger"
+                    onclick="limparLista()"
+                
+                >
+                    limpiar lista
+                </button>
 
                 <h2>Agregar Producto</h2>
                 <form id="form-producto">
@@ -46,11 +52,41 @@
          */
         function agregarProducto(nombreProducto) {
             // su implementación
+            let elementoLi = document.createElement('li');
+            elementoLi.innerText = nombreProducto;
+
+
+
+            let botonLi = document.createElement('button');
+            botonLi.innerText = 'Eliminar';
+            botonLi.setAttribute('id', nombreProducto);
+            botonLi.addEventListener('click', eliminarElemento);
+
+
+            elementoLi.appendChild(botonLi);
+            let elementoUl = document.getElementById('lista-productos');
+            elementoUl.appendChild(elementoLi);
         }
+
+        function ordenarLista(){
+            
+        }
+
+
+
+        function eliminarElemento(evento){
+            evento.target.parentElement.remove();
+        }
+
+        function limparLista(){
+            let elementoUl = document.getElementById('lista-productos');
+            elementoUl.innerText = '';
+        }
+
 
         function handlerFormulario(e) {
             e.preventDefault();
-            const input = e.target.querySelector('input');
+            const input = document.querySelector('input');
             const nombreProducto = input.value;
             input.value = "";
             agregarProducto(nombreProducto);
