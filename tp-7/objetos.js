@@ -119,8 +119,10 @@ console.log("sinDocumento()", sinDocumento(personaEjemplo));
  * Retorna: 
  * - el mismo listado, ordenado alfabéticamente por el apellido de la persona 
  */
-function ordenarPorApellido(listaDePersonas) {
-    
+function ordenarPorApellido(listaDePersonas){
+   return listaDePersonas.sort((persona1, persona2)=>{
+    return persona1.apellido.localCompare(persona2,apellido);
+   });
 }
 console.log("ordenarPorApellido()", ordenarPorApellido(listaPersonasEjemplo));
 
@@ -132,7 +134,13 @@ console.log("ordenarPorApellido()", ordenarPorApellido(listaPersonasEjemplo));
  * - una lista de strings, con sólo los nombres de las personas
  */
 function soloNombres(listaDePersonas) {
-    // 
+    let soloNombres = [];
+    listaDePersonas.forEach(elemento => {
+        soloNombres.push(elemento.nombre);
+    });
+    return soloNombres.map((persona)=>{
+        return persona.nombre;
+    });
 }
 console.log("soloNombres()", soloNombres(listaPersonasEjemplo));
 
@@ -144,7 +152,11 @@ console.log("soloNombres()", soloNombres(listaPersonasEjemplo));
  * - un numero, con el cálculo del promedio de las edades
  */
 function promedioEdades(listaDePersonas) {
-    //
+    let sumaEdades = 0;
+    listaDePersonas.forEach(element =>{
+        sumaEdades =+ element.edad;
+    });
+    return sumaEdades/listaDePersonas.lenghth;
 }
 console.log("promedioEdades()", promedioEdades(listaPersonasEjemplo));
 
@@ -156,7 +168,7 @@ console.log("promedioEdades()", promedioEdades(listaPersonasEjemplo));
  * - una lista, array, conteniendo solamente las personas con más de 18 años
  */
 function soloMayoresDeEdad(listaDePersonas) {
-    //
+    return listaDePersonas.filter(e => e.edad > 18);
 }
 console.log("soloMayoresDeEdad()", soloMayoresDeEdad(listaPersonasEjemplo));
 
@@ -168,6 +180,14 @@ console.log("soloMayoresDeEdad()", soloMayoresDeEdad(listaPersonasEjemplo));
  * - una objeto con la persona de mayor edad en todo el listado. En caso de que hayan 2 personas con la misma edad, se puede retornar la primera que aparezca en el listado.
  */
 function laPersonaMayor(listaDePersonas) {
-    //
+    let mayor = -Infinity;
+    let personaMayor = {};
+    listaDePersonas.forEach(persona =>{
+        if(mayor < persona.edad){
+            mayor = persona.edad;
+            personaMayor = persona;
+        }
+    });
+    return personaMayor;
 }
 console.log("laPersonaMayor()", laPersonaMayor(listaPersonasEjemplo));
