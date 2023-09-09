@@ -25,13 +25,14 @@
                 </ul>
 
                 <hr class="hr">
-                <button
-                    class="btn btn-danger"
-                    onclick="limparLista()"
-                
-                >
+                <button class="btn btn-danger" onclick="limparLista()">
                     limpiar lista
                 </button>
+                <button class="btn btn-success" onclick="ordenarLista()" >ordenar Lista</button>
+
+
+
+
 
                 <h2>Agregar Producto</h2>
                 <form id="form-producto">
@@ -54,36 +55,34 @@
             // su implementación
             let elementoLi = document.createElement('li');
             elementoLi.innerText = nombreProducto;
-
-
-
             let botonLi = document.createElement('button');
             botonLi.innerText = 'Eliminar';
             botonLi.setAttribute('id', nombreProducto);
             botonLi.addEventListener('click', eliminarElemento);
-
-
             elementoLi.appendChild(botonLi);
             let elementoUl = document.getElementById('lista-productos');
             elementoUl.appendChild(elementoLi);
         }
-
         function ordenarLista(){
+            let elementoUl = document.getElementById('lista-productos');
+            let listaDeLis = elementoUl.querySelectorAll('li');
+            let listaNueva = Array.from(listaDeLis);
+            let listaOrdenada = listaNueva.sort((elementoA,elementoB)=>{
+                return elementoA.innerText.localeCompare(elementoB.innerText);
+            })
             
+            listaOrdenada.forEach((elemento)=>{
+                elementoUl.append(elemento);
+            })
+
         }
-
-
-
         function eliminarElemento(evento){
             evento.target.parentElement.remove();
         }
-
         function limparLista(){
             let elementoUl = document.getElementById('lista-productos');
             elementoUl.innerText = '';
         }
-
-
         function handlerFormulario(e) {
             e.preventDefault();
             const input = document.querySelector('input');
@@ -91,7 +90,6 @@
             input.value = "";
             agregarProducto(nombreProducto);
         }
-
         document.querySelector('form').addEventListener('submit', handlerFormulario);
     </script>
 </body>
