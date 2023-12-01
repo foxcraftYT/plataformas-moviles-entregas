@@ -46,28 +46,18 @@ var personaEjemplo = listaPersonasEjemplo[0]
  * }
  */
 function crearPersona(nombre, apellido, edad, documento) {
-    var objeto ={
-        nombre : "",
-        apellido : "",
-        edad : "",
-        documento : ""
+    var objeto={
+        nombre,
+        apellido,
+        edad,
+        documento
     };
-    var objeto2 ={
-        nombre : "",
-        apellido : "",
-        edad : "",
-        documento : ""
+    return {
+        nombre,
+        apellido,
+        edad,
+        documento
     };
-
-
-
-
-
-
-    objeto.nombre = nombre;
-    objeto.apellido = apellido;    
-    objeto.edad = edad;
-    objeto.documento = documento;
 }
 console.log("crearPersona()", crearPersona("Juan", "Pérez", 20, 123456));
 
@@ -77,10 +67,12 @@ console.log("crearPersona()", crearPersona("Juan", "Pérez", 20, 123456));
  * - `persona`: objeto de la forma persona
  * 
  * Retorna: 
- * - un string, con el nombre completo de una persona. Asumimos que nombre completo tiene el formato "Apellido, Nombre". Por ejemplo para una persona con nombre "Juan" y apellido "Pérez", el nombre completo sería "Pérez, Juan".
+ * - un string, con el nombre completo de una persona.
+ *  Asumimos que nombre completo tiene el formato "Apellido, Nombre". 
+ * Por ejemplo para una persona con nombre "Juan" y apellido "Pérez", el nombre completo sería "Pérez, Juan".
  */
 function nombreCompletoDePersona(persona) {
-    // 
+    return persona.apellido+", "+persona.nombre;
 }
 console.log("nombreCompletoDePersona()", nombreCompletoDePersona(personaEjemplo));
 
@@ -92,7 +84,8 @@ console.log("nombreCompletoDePersona()", nombreCompletoDePersona(personaEjemplo)
  * - un objeto, representando a la misma persona recibida, pero con un año más. 
  */
 function felizCumpleaños(persona) {
-    // 
+    persona.edad++;
+    return persona;
 }
 console.log("felizCumpleaños()", felizCumpleaños(personaEjemplo));
 
@@ -104,11 +97,8 @@ console.log("felizCumpleaños()", felizCumpleaños(personaEjemplo));
  * - un objeto, representando a la misma persona recibida, pero sin el campo documento.
  */
 function sinDocumento(persona) {
-    return{
-        nombre: persona.nombre,
-        apellido: persona.apellido,
-        edad: persona.edad
-    };
+    let {documento, ...params}=persona;
+    return params;
 }
 console.log("sinDocumento()", sinDocumento(personaEjemplo));
 
@@ -119,10 +109,11 @@ console.log("sinDocumento()", sinDocumento(personaEjemplo));
  * Retorna: 
  * - el mismo listado, ordenado alfabéticamente por el apellido de la persona 
  */
-function ordenarPorApellido(listaDePersonas){
-   return listaDePersonas.sort((persona1, persona2)=>{
-    return persona1.apellido.localCompare(persona2,apellido);
-   });
+function ordenarPorApellido(listaDePersonas) {
+    return listaDePersonas.sort((persona1,persona2)=>{
+        return persona1.apellido.localeCompare(persona2.apellido);
+
+    });
 }
 console.log("ordenarPorApellido()", ordenarPorApellido(listaPersonasEjemplo));
 
@@ -134,11 +125,12 @@ console.log("ordenarPorApellido()", ordenarPorApellido(listaPersonasEjemplo));
  * - una lista de strings, con sólo los nombres de las personas
  */
 function soloNombres(listaDePersonas) {
-    let soloNombres = [];
-    listaDePersonas.forEach(elemento => {
-        soloNombres.push(elemento.nombre);
-    });
-    return soloNombres.map((persona)=>{
+    let solonombres=[];
+    
+    // listaDePersonas.forEach(elemento => {
+    //     solonombres.push(elemento.nombre)
+    // });return solonombres;
+    return listaDePersonas.map((persona)=>{
         return persona.nombre;
     });
 }
@@ -152,11 +144,12 @@ console.log("soloNombres()", soloNombres(listaPersonasEjemplo));
  * - un numero, con el cálculo del promedio de las edades
  */
 function promedioEdades(listaDePersonas) {
-    let sumaEdades = 0;
-    listaDePersonas.forEach(element =>{
-        sumaEdades =+ element.edad;
+    let sumaedades=0;
+
+    listaDePersonas.forEach(elementos => {
+        sumaedades=+elementos.edad;
     });
-    return sumaEdades/listaDePersonas.lenghth;
+    return sumaedades=sumaedades/listaDePersonas.length;
 }
 console.log("promedioEdades()", promedioEdades(listaPersonasEjemplo));
 
@@ -168,7 +161,7 @@ console.log("promedioEdades()", promedioEdades(listaPersonasEjemplo));
  * - una lista, array, conteniendo solamente las personas con más de 18 años
  */
 function soloMayoresDeEdad(listaDePersonas) {
-    return listaDePersonas.filter(e => e.edad > 18);
+    return listaDePersonas.filter((e)=>e.edad>18)
 }
 console.log("soloMayoresDeEdad()", soloMayoresDeEdad(listaPersonasEjemplo));
 
@@ -180,14 +173,12 @@ console.log("soloMayoresDeEdad()", soloMayoresDeEdad(listaPersonasEjemplo));
  * - una objeto con la persona de mayor edad en todo el listado. En caso de que hayan 2 personas con la misma edad, se puede retornar la primera que aparezca en el listado.
  */
 function laPersonaMayor(listaDePersonas) {
-    let mayor = -Infinity;
-    let personaMayor = {};
-    listaDePersonas.forEach(persona =>{
-        if(mayor < persona.edad){
-            mayor = persona.edad;
-            personaMayor = persona;
-        }
-    });
-    return personaMayor;
+    condicion=-Infinity;
+    let personaobjet={}
+    listaDePersonas.forEach(persona=>{
+        if(condicion<persona.edad){condicion=persona}
+
+
+    });return condicion;
 }
 console.log("laPersonaMayor()", laPersonaMayor(listaPersonasEjemplo));
